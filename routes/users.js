@@ -3,7 +3,6 @@ var router = express.Router();
 
 
 router.use('/', function (req, res, next) {
-
     if(!req.user){
         res.redirect('/');
     }

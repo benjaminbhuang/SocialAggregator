@@ -12,7 +12,7 @@ module.exports = function () {
 
             var user = {};
 
-            user.email = profile.email[0].value;
+            user.email = profile.emails[0].value;
             user.image = profile._json.image.url;
             user.displayName = profile.displayName;
 
