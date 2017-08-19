@@ -12,15 +12,8 @@ var users = require('./routes/users');
 var auth = require('./routes/auth');
 
 var app = express();
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-passport.use(new GoogleStrategy({
-    clientID: '',
-    clientSecret: '',
-    callbackURL: 'http://localhost:3000/auth/google/callback'},
-    function(req, accessToken, refreshToken, profile, done){
-      done(null, profile);
-    }));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,16 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({secret:'anything'}));
 
-app.use(passport.initialize());
-app.use(passport.session());
+require('./config/passport')(app);
 
-passport.serializeUser(function (user, done) {
-    done(null, user);
-});
-
-passport.deserializeUser(function (user, done) {
-    done(null, user);
-});
 
 app.use('/', index);
 app.use('/users', users);
